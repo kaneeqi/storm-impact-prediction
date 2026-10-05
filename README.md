@@ -117,7 +117,7 @@ GitHub es la fuente oficial del código y del notebook. Para trabajar en Colab:
 ## Integrantes
 
 - Eduardo Bravo
-- _(por completar)_
+- Francesca Nicole Bances Torres
 - _(por completar)_
 
 <!-- TODO: agregar los nombres completos de los otros dos integrantes (y sus códigos UPC, si el docente los pide). -->
