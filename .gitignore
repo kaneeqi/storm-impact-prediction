@@ -1,0 +1,33 @@
+# --- Python ---
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# --- Entornos virtuales ---
+.venv/
+venv/
+
+# --- Sistema operativo ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Datos: no se versionan (ver data/README.md) ---
+# Se ignora el contenido de las carpetas, pero se conservan los .gitkeep.
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+# Por si el archivo RAW de NOAA se descarga fuera de data/raw/ por error.
+StormEvents_*.csv*
+
+# --- Artefactos generados (modelos, pipelines) ---
+*.pkl
+*.joblib
+
+# --- Secretos ---
+.env
+*.env
+
+# --- Archivos temporales de Office (se crean al abrir un .pptx/.docx) ---
+~$*
