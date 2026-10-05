@@ -1,0 +1,9 @@
+# Paquetes que importa notebooks/TP1.ipynb.
+# Sin versiones fijas: el notebook se probó con pandas 2.2 y 3.0 con los mismos resultados (ver README).
+pandas
+numpy
+matplotlib
+seaborn
+
+# Solo para ejecutar el notebook en local (Google Colab ya trae su propio entorno).
+jupyterlab
