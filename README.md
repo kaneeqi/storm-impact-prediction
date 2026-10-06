@@ -8,11 +8,9 @@
 
 Proyecto integrador del curso. Desarrollamos un flujo de Data Science (problema y datos → EDA → preparación → modelamiento → evaluación) sobre la Storm Events Database de NOAA/NCEI, que registra eventos meteorológicos severos ocurridos en Estados Unidos junto con sus víctimas y daños estimados.
 
-Por ahora el repositorio contiene la definición del problema, el análisis exploratorio y el análisis de calidad de los datos. Todavía no hay modelos.
-
 ## Objetivo actual
 
-Analizar los datos y, posteriormente, desarrollar modelos capaces de estimar tempranamente el riesgo de alto impacto documentado, usando solo información compatible con el momento inicial del evento.
+Analizar los datos y desarrollar modelos capaces de estimar tempranamente el riesgo de alto impacto documentado, usando solo información compatible con el momento inicial del evento.
 
 La variable objetivo la define el equipo (no es una definición oficial de NOAA): un evento es de alto impacto documentado si registra al menos una muerte o lesión, directa o indirecta, o un daño documentado a propiedad más cultivos de al menos USD 1,000,000. En 2025 cumplen esta condición 1,014 de 72,360 eventos (1.40 %).
 
@@ -28,27 +26,19 @@ El archivo no se versiona en Git. Las instrucciones de descarga y verificación 
 
 ## Estado
 
-Trabajo Parcial (TP1) en desarrollo.
-
-**Hecho:**
+Trabajo Parcial (TP1) desarrollado en `notebooks/TP1.ipynb`, que contiene:
 
 - definición del problema;
-- preparación inicial (construcción de la variable objetivo y transformaciones preliminares);
+- dataset;
 - análisis exploratorio (EDA);
-- análisis de calidad de los datos.
-
-**Pendiente:**
-
+- calidad y preparación de los datos;
+- auditoría de leakage;
 - separación train / validation / test;
-- pipeline de preprocesamiento;
-- baseline;
-- modelos;
-- evaluación;
-- cierre del TP1 (hallazgos, limitaciones y plan hacia el TF1).
-
-## Actualización del avance (TP1)
-
-Después del análisis de calidad, el notebook `TP1.ipynb` se completó con las secciones 5 a 10. Es decir, los puntos listados arriba como pendientes (separación de los datos, pipeline, baselines, modelos, evaluación y cierre del TP1) ya están desarrollados en el notebook. Las siguientes secciones resumen lo nuevo.
+- pipeline reproducible de preprocesamiento;
+- baselines;
+- dos modelos preliminares;
+- evaluación en validation;
+- hallazgos, limitaciones y plan hacia el TF1.
 
 ## Decisiones principales
 
@@ -86,7 +76,7 @@ Validation tiene 9,980 eventos y 140 positivos.
 
 **Limitaciones principales**
 
-- El target es "alto impacto *documentado*": el 20.6 % de los eventos no trae información de daño y se trata como 0, por lo que hay positivos reales que quedan como negativos.
+- El target es "alto impacto *documentado*": el 20.6 % de los eventos (14,927) no tiene información documentada de daño. Estos valores no se imputan como cero. Si el registro tampoco documenta víctimas, el evento queda como negativo bajo nuestro target de alto impacto documentado, aunque su impacto real sea incierto.
 - Se usa un solo año (2025) y solo datos de EE. UU.
 - Los registros de NOAA ya fueron revisados después del evento, por lo que los resultados son una estimación optimista de un uso en tiempo real.
 - Validation tiene pocos positivos (140), así que las comparaciones entre modelos no son concluyentes.
@@ -158,9 +148,9 @@ storm-impact-prediction/
    jupyter lab notebooks/TP1.ipynb
    ```
 
-**Limitación actual:** la celda de carga de `TP1.ipynb` importa `google.colab` y monta Google Drive, por lo que hoy el notebook solo se ejecuta en Colab. Se ajustará para que en local lea el archivo desde `data/raw/` y en Colab lo descargue desde NOAA, sin depender de Drive.
+**Carga de datos:** la celda de carga de `TP1.ipynb` lee el archivo desde `data/raw/` si existe; si no, lo lee directamente desde la URL oficial de NOAA. No usa Google Drive.
 
-**Versiones probadas:** con la celda de carga adaptada para leer el archivo local, el notebook se ejecutó completo con pandas 2.2.3 y con pandas 3.0.6, y los resultados numéricos coincidieron con los guardados en el notebook. Con pandas 3 solo cambia la presentación de algunos tipos de dato (`str` en lugar de `object`) y el orden de algunos empates en los conteos.
+**Versiones probadas:** leyendo el archivo desde `data/raw/`, el notebook se ejecutó completo con pandas 2.2.3 y scikit-learn 1.6.1, 1.7.2 y 1.8.0, y los resultados coincidieron con los guardados en el notebook. Con pandas 3.0.6 y scikit-learn 1.9.1 también se ejecuta completo, pero cambian la presentación de algunos tipos de dato (`str` en lugar de `object`), el orden de algunos empates en los conteos y algunas métricas de Random Forest (su PR-AUC se mantiene en 0.252).
 
 ## Google Colab
 
@@ -168,7 +158,7 @@ GitHub es la fuente oficial del código y del notebook. Para trabajar en Colab:
 
 1. Abrir el notebook desde GitHub: en Colab, *Archivo → Abrir notebook → GitHub*, o directamente [este enlace](https://colab.research.google.com/github/kaneeqi/storm-impact-prediction/blob/main/notebooks/TP1.ipynb) (si el repositorio es privado, Colab pedirá autorizar el acceso a GitHub).
 2. No hace falta instalar `requirements.txt`: Colab ya incluye pandas, numpy, matplotlib y seaborn.
-3. La celda de carga lee el archivo directamente desde la URL oficial de NOAA. Hoy, además, monta Google Drive para guardar ahí una copia del CSV; ese paso no es necesario para el análisis y se eliminará.
+3. En Colab no existe la copia local de `data/raw/`, así que la celda de carga lee el archivo directamente desde la URL oficial de NOAA. No hace falta montar Google Drive.
 4. Los cambios hechos en Colab deben volver al repositorio (descargar el `.ipynb` y hacer commit, o *Archivo → Guardar una copia en GitHub*). Una copia que quede solo en Drive no es la versión oficial.
 
 ## Integrantes
