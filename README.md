@@ -59,6 +59,7 @@ Después del análisis de calidad, el notebook `TP1.ipynb` se completó con las 
 - **Baselines:** `DummyClassifier` (prevalencia) y tasa de alto impacto por `EVENT_TYPE`.
 - **Modelos preliminares:** regresión logística y Random Forest, ambos con `class_weight="balanced"` y sin ajuste de hiperparámetros.
 - **Métrica principal:** PR-AUC (*Average Precision*). Se reportan también ROC-AUC, precision, recall, F1 y F2 con umbral 0.5 como referencia.
+- **Herramientas:** Python (pandas + scikit-learn) en notebooks, ejecutados en Colab y verificados en local. La comparación con R, KNIME, Orange y Weka mediante una matriz ponderada está en [`docs/matriz_decision_herramientas.md`](docs/matriz_decision_herramientas.md).
 
 ## Resultados preliminares (validation)
 
@@ -121,7 +122,7 @@ storm-impact-prediction/
 ├── reports/
 │   ├── figures/        figuras exportadas
 │   └── slides/         presentaciones del TP1 y del TF1
-├── docs/               documentación del proyecto
+├── docs/               documentación del proyecto (matriz de decisión de herramientas)
 ├── requirements.txt    dependencias de Python
 └── README.md
 ```
