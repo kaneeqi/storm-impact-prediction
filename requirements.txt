@@ -1,9 +1,10 @@
 # Paquetes que importa notebooks/TP1.ipynb.
-# Sin versiones fijas: el notebook se probó con pandas 2.2 y 3.0 con los mismos resultados (ver README).
+# Sin versiones fijas: el notebook se probó con pandas 2.2 y 3.0 y con scikit-learn 1.6 a 1.9, con los mismos resultados.
 pandas
 numpy
 matplotlib
 seaborn
+scikit-learn
 
 # Solo para ejecutar el notebook en local (Google Colab ya trae su propio entorno).
 jupyterlab
